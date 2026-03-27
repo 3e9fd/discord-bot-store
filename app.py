@@ -1,12 +1,12 @@
+import os
 from flask import Flask, request, session, redirect, url_for, render_template_string
 import requests
 
 app = Flask(__name__)
-app.secret_key = 'discord_store_secret_key' # لتأمين جلسات المستخدمين
+app.secret_key = os.getenv('SECRET_KEY', 'default_secret_key')
 
-# --- ⚠️ إعدادات مهمة ⚠️ ---
-# ضع رابط الويب هوك الخاص بسيرفرك هنا
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1486930234837176320/YUaF_3uDpGJ5whtPFY3lOhFHekYwK-1wOmH8Gt_5fLj1Th73LnFRBfxUfKnItLDMahbx"
+# قراءة الويب هوك من إعدادات Render لزيادة الأمان
+DISCORD_WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL')
 
 # قائمة المنتجات
 PRODUCTS = {
